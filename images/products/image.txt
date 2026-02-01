@@ -1,1 +1,3 @@
 place images here named product#.jpg
+
+fallback to "placeholder.jpg"
