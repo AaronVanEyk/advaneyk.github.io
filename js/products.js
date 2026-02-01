@@ -24,18 +24,8 @@ fetch(CATEGORY_FILES[category])
     products = p;
     renderProducts(products);
     setupSorting();
+    setupSearch(); // <-- attach search after products are loaded
   });
-
-function setupSorting() {
-  document.getElementById('sort-price')
-    .addEventListener('change', e => {
-      const v = e.target.value;
-      const sorted = [...products];
-      if(v==='asc') sorted.sort((a,b)=>a.price-b.price);
-      if(v==='desc') sorted.sort((a,b)=>b.price-a.price);
-      renderProducts(sorted);
-    });
-}
 
 function renderProducts(list) {
   const container = document.getElementById('product-list');
@@ -55,4 +45,35 @@ function renderProducts(list) {
     `;
     container.appendChild(div);
   });
+}
+
+function setupSorting() {
+  document.getElementById('sort-price')
+    .addEventListener('change', e => {
+      const v = e.target.value;
+      const sorted = [...products];
+      if(v==='asc') sorted.sort((a,b)=>a.price-b.price);
+      if(v==='desc') sorted.sort((a,b)=>b.price-a.price);
+      renderProducts(sorted);
+    });
+}
+
+function setupSearch() {
+  const searchInput = document.getElementById('search');
+  const searchBtn = document.getElementById('search-btn');
+
+  function performSearch() {
+    const q = searchInput.value.toLowerCase();
+    const filtered = products.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.product_number.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      p.tags.some(t => t.includes(q))
+    );
+    renderProducts(filtered);
+  }
+
+  searchInput.addEventListener('input', performSearch);
+  searchBtn.addEventListener('click', performSearch);
+  searchInput.addEventListener('keypress', e => { if(e.key==='Enter') performSearch(); });
 }
