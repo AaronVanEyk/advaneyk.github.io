@@ -3,39 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Catalog - Category</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Category</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div data-include="includes/header.html"></div>
+  <!-- header -->
+  <div id="header-placeholder"></div>
+  <script>
+    fetch('header.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('header-placeholder').innerHTML = html);
+  </script>
 
   <main>
-    <h1 id="category-title"></h1>
+    <h1>Category Products</h1>
 
-    <!-- Search and sort bar -->
-    <div class="search-sort-bar">
-      <div class="search-controls">
-        <input type="text" id="search" placeholder="Search this category...">
-        <button id="search-btn">Search</button>
-      </div>
-
-      <div class="sort-controls">
-        <label for="sort-price">Sort by price:</label>
-        <select id="sort-price">
-          <option value="">Default</option>
-          <option value="asc">Lowest to Highest</option>
-          <option value="desc">Highest to Lowest</option>
-        </select>
-      </div>
+    <!-- Filter and Search -->
+    <div class="controls">
+      <label for="tagFilter">Filter by tag:</label>
+      <select id="tagFilter"></select>
+      <br> <!-- line break between filter and search -->
+      <input type="text" id="searchInput" placeholder="Search products...">
     </div>
 
-    <div id="product-list" class="product-grid"></div>
+    <div id="product-list" class="product-list">
+      <!-- Product cards injected by products.js -->
+    </div>
   </main>
 
-  <div data-include="includes/footer.html"></div>
+  <!-- footer -->
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('footer-placeholder').innerHTML = html);
+  </script>
 
+  <!-- scripts -->
   <script src="js/include.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/products.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('cat') || 'connectors';
+    loadProducts(`data/${category}.csv`);
+  </script>
 </body>
 </html>
