@@ -1,5 +1,32 @@
 product_number,name,price,inventory,description,tags
-PV-001,NMO Connector A,12.99,42,"Gold-plated NMO connector
-• DC short
-• Weather resistant",connector|nmo|rf
-PV-002,NMO Connector B,9.50,0,"Low-profile DC short base",connector|dc-short
+PV-CAN-K,Canada Patch - Black,5,9,"
+• Black Color
+• 5 cm X 8 cm (2 inch x 3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|black
+PV-CAN-RW,Canada Patch - Red & White,5,9,"
+• Classic Red and White Color
+• 5 cm X 8 cm (2 inch x 3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|red|white
+PV-CAN-RK,Canada Patch - Red & Black,5,6,"
+• Red & Black Color
+• 5 cm X 8 cm (2 inch x 3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|black|red
+PV-CAN-GG,Canada Patch - Green,5,1,"
+• Green Color
+• 5 cm X 8 cm (2 inch x 3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|green
+PV-CAN-D,Canada Patch - Brown,5,3,"
+• Brown Color
+• 5 cm X 8 cm (2 inch x 3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|brown
+PV-CAN-W,Canada Patch with Text,5,2,"
+• Red and White Color with Canada Text
+• 5 cm X 8 cm (2 inch x 3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|red|white
+PV-CAN-GD,Canada Patch - Green & Brown,5,4,"
+• Green and Brown Color 
+• 5 cm X 8 cm (2 inch x 3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|red|white
+PV-ZORT,Zombie Outbreak Response Team Patch,10,2,"
+• Approximately 8 cm diameter (3 inch)
+• Hook and Loop backing included",patch|hook-and-loop|canada|red|white
