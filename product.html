@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Details</title>
+  <title>Product</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,9 +16,7 @@
   </script>
 
   <main>
-    <div id="product-details">
-      <!-- Product details injected by product.js -->
-    </div>
+    <div id="product-details"></div> <!-- container for single product -->
   </main>
 
   <!-- Footer -->
@@ -35,9 +33,8 @@
   <script src="js/product.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const category = params.get('cat') || 'connectors';
     const sku = params.get('sku');
-    if (sku) loadProduct(`data/${category}.csv`);
+    if (sku) loadProduct(`data/connectors.csv`, sku); // Adjust CSV path if needed
   </script>
 </body>
 </html>
