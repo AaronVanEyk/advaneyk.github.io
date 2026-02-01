@@ -17,10 +17,14 @@ async function loadProducts(csvPath) {
 
 // Render category page product cards safely
 function renderProducts(list) {
+  
   const container = document.getElementById('product-list');
   container.innerHTML = '';
+  console.log('renderProducts called with', list);
 
   list.forEach(p => {
+    console.log('Rendering product:', p);
+
     // Step 2: guard against undefined/malformed products
     if (!p || !p.product_number) return;
 
