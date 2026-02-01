@@ -1,37 +1,5 @@
 // products.js
 
-function populateTagFilter(products) {
-  const select = document.getElementById('tag-filter');
-  if (!select) return;
-  const tags = Array.from(new Set(products.flatMap(p => p.tags)));
-  select.innerHTML = `<option value="">All Tags</option>`;
-  tags.forEach(tag => {
-    const option = document.createElement('option');
-    option.value = tag;
-    option.textContent = tag;
-    select.appendChild(option);
-  });
-}
-
-// === Step: Global products array for search/filter ===
-let allProducts = []; // global
-
-// === Step: Load CSV and populate products ===
-async function loadProducts(csvPath) {
-  try {
-    const response = await fetch(csvPath);
-    if (!response.ok) throw new Error(`Failed to fetch ${csvPath}`);
-    const text = await response.text();
-    allProducts = parseCSV(text); // save globally for filtering/search
-    renderProducts(allProducts);   // draw initial product cards
-    populateTagFilter(allProducts); // fill dropdown
-  } catch (err) {
-    console.error(err);
-    const container = document.getElementById('product-list');
-    if (container) container.innerHTML = '<p>Failed to load products.</p>';
-  }
-}
-
 
 // Render category page product cards safely
 function renderProducts(list) {
@@ -79,6 +47,20 @@ function renderProducts(list) {
   });
 }
 
+
+function populateTagFilter(products) {
+  const select = document.getElementById('tag-filter');
+  if (!select) return;
+  const tags = Array.from(new Set(products.flatMap(p => p.tags)));
+  select.innerHTML = `<option value="">All Tags</option>`;
+  tags.forEach(tag => {
+    const option = document.createElement('option');
+    option.value = tag;
+    option.textContent = tag;
+    select.appendChild(option);
+  });
+}
+
 // real-time search input listener
 function attachSearchListener() {
   const searchInput = document.getElementById('search');
@@ -100,3 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProducts('data/connectors.csv');  // example CSV
   attachSearchListener();                // attach search listener
 });
+
+// === Step: Global products array for search/filter ===
+let allProducts = []; // global
+
+// === Step: Load CSV and populate products ===
+async function loadProducts(csvPath) {
+  try {
+    const response = await fetch(csvPath);
+    if (!response.ok) throw new Error(`Failed to fetch ${csvPath}`);
+    const text = await response.text();
+    allProducts = parseCSV(text); // save globally for filtering/search
+    renderProducts(allProducts);   // draw initial product cards
+    populateTagFilter(allProducts); // fill dropdown
+  } catch (err) {
+    console.error(err);
+    const container = document.getElementById('product-list');
+    if (container) container.innerHTML = '<p>Failed to load products.</p>';
+  }
+}
