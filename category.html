@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Products</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Catalog - Category</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div data-include="includes/header.html"></div>
 
-<div data-include="includes/header.html"></div>
+  <main>
+    <h1 id="category-title"></h1>
 
-<main>
-  <h1 id="category-title"></h1>
-
-  <div class="controls">
+    <label for="sort-price">Sort by price:</label>
     <select id="sort-price">
-      <option value="">Sort by price</option>
-      <option value="asc">Low → High</option>
-      <option value="desc">High → Low</option>
+      <option value="">Default</option>
+      <option value="asc">Lowest to Highest</option>
+      <option value="desc">Highest to Lowest</option>
     </select>
-  </div>
 
-  <div id="product-list" class="product-grid"></div>
-</main>
+    <div id="product-list" class="product-grid"></div>
+  </main>
 
-<div data-include="includes/footer.html"></div>
+  <div data-include="includes/footer.html"></div>
 
-<script src="js/include.js"></script>
-<script src="js/products.js"></script>
+  <script src="js/include.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/products.js"></script>
 </body>
 </html>
