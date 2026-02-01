@@ -1,0 +1,8 @@
+connector
+nmo
+rf
+dc-short
+mount
+antenna
+mobile
+weatherproof
