@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Catalog - Product</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div data-include="includes/header.html"></div>
 
-<div data-include="includes/header.html"></div>
+  <main>
+    <div id="product-details"></div>
+  </main>
 
-<main>
-  <div id="product-details">Loading product…</div>
-</main>
+  <div data-include="includes/footer.html"></div>
 
-<div data-include="includes/footer.html"></div>
-
-<script src="js/include.js"></script>
-<script src="js/product.js"></script>
+  <script src="js/include.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/product.js"></script>
 </body>
 </html>
