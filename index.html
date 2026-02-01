@@ -10,16 +10,27 @@
   <div data-include="includes/header.html"></div>
 
   <main>
-    <h1>Search Products</h1>
-    <input type="text" id="search" placeholder="Search by name, SKU, description, or tag">
+    <h1>Welcome to My Catalog</h1>
+    <p>Select a product category:</p>
 
-    <div id="results" class="product-grid"></div>
+    <div class="category-grid">
+      <a href="category.html?cat=connectors" class="category-card">
+        <h2>Connectors</h2>
+        <p>Browse all connectors available.</p>
+      </a>
+      <a href="category.html?cat=mounts" class="category-card">
+        <h2>Mounts</h2>
+        <p>Browse all mounts available.</p>
+      </a>
+      <a href="category.html?cat=antennas" class="category-card">
+        <h2>Antennas</h2>
+        <p>Browse all antennas available.</p>
+      </a>
+    </div>
   </main>
 
   <div data-include="includes/footer.html"></div>
 
   <script src="js/include.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/search.js"></script>
 </body>
 </html>
