@@ -1,20 +1,34 @@
 // ============================
-// Load single product by SKU
+// Load single product by SKU from multiple CSVs
 // ============================
-async function loadProduct(csvPath, sku) {
-  try {
-    const response = await fetch(csvPath);
-    if (!response.ok) throw new Error(`Failed to fetch ${csvPath}`);
-    const text = await response.text();
-    const products = parseCSV(text);
+const categoryCSVs = [
+  '/data/accessoires.csv',
+  '/data/antennas.csv',
+  '/data/patches.csv'
+];
 
-    const product = products.find(p => p.product_number === sku);
-    renderProduct(product);
-  } catch (err) {
-    console.error('Error loading product:', err);
-    const container = document.getElementById('product-details');
-    if (container) container.innerHTML = '<p>Failed to load product.</p>';
+async function loadProductBySKU(sku) {
+  const container = document.getElementById('product-details');
+
+  for (const csvPath of categoryCSVs) {
+    try {
+      const response = await fetch(csvPath);
+      if (!response.ok) continue; // skip if file not found
+      const text = await response.text();
+      const products = parseCSV(text); // you already have parseCSV in utils.js
+      const product = products.find(p => p.product_number === sku);
+
+      if (product) {
+        renderProduct(product);
+        return; // stop after first match
+      }
+    } catch (err) {
+      console.error(`Error fetching ${csvPath}:`, err);
+    }
   }
+
+  // If we reach here, product not found
+  container.innerHTML = '<p>Product not found.</p>';
 }
 
 // ============================
