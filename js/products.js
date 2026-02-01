@@ -15,7 +15,6 @@ async function loadProducts(csvPath) {
     const text = await response.text();
     allProducts = parseCSV(text);           // parse CSV into array of objects
     renderProducts(allProducts);            // render initial product cards
-    populateTagFilter(allProducts);         // populate tag dropdown
   } catch (err) {
     console.error('Error loading products:', err);
     const container = document.getElementById('product-list');
@@ -67,67 +66,3 @@ function renderProducts(list) {
   });
 }
 
-// ============================
-// Populate tag dropdown safely
-// ============================
-function populateTagFilter(products) {
-  const select = document.getElementById('tag-filter');
-  if (!select) return;
-
-  const tags = Array.from(new Set(products.flatMap(p => p.tags || []))); // safe flatten
-  select.innerHTML = `<option value="">All Tags</option>`;
-
-  tags.forEach(tag => {
-    const option = document.createElement('option');
-    option.value = tag;
-    option.textContent = tag;
-    select.appendChild(option);
-  });
-}
-
-// ============================
-// Attach real-time search
-// ============================
-function attachSearchListener() {
-  const searchInput = document.getElementById('search');
-  if (!searchInput) return;
-
-  searchInput.addEventListener('input', e => {
-    const term = e.target.value.toLowerCase();
-
-    const filtered = allProducts.filter(p =>
-      (p.name || '').toLowerCase().includes(term) ||
-      (p.description || '').toLowerCase().includes(term) ||
-      (p.tags || []).some(tag => tag.toLowerCase().includes(term))
-    );
-
-    renderProducts(filtered);
-  });
-}
-
-// ============================
-// Attach tag filter listener
-// ============================
-function attachTagFilterListener() {
-  const select = document.getElementById('tag-filter');
-  if (!select) return;
-
-  select.addEventListener('change', e => {
-    const selectedTag = e.target.value;
-
-    const filtered = selectedTag
-      ? allProducts.filter(p => (p.tags || []).includes(selectedTag))
-      : allProducts;
-
-    renderProducts(filtered);
-  });
-}
-
-// ============================
-// Initialize when DOM is ready
-// ============================
-document.addEventListener('DOMContentLoaded', () => {
-  loadProducts('data/connectors.csv'); // replace with your CSV path
-  attachSearchListener();
-  attachTagFilterListener();
-});
