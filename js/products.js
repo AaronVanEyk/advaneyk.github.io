@@ -1,5 +1,18 @@
 // products.js
 
+function populateTagFilter(products) {
+  const select = document.getElementById('tag-filter');
+  if (!select) return;
+  const tags = Array.from(new Set(products.flatMap(p => p.tags)));
+  select.innerHTML = `<option value="">All Tags</option>`;
+  tags.forEach(tag => {
+    const option = document.createElement('option');
+    option.value = tag;
+    option.textContent = tag;
+    select.appendChild(option);
+  });
+}
+
 // === Step: Global products array for search/filter ===
 let allProducts = []; // global
 
@@ -63,19 +76,6 @@ function renderProducts(list) {
     `;
 
     container.appendChild(div);
-  });
-}
-
-function populateTagFilter(products) {
-  const select = document.getElementById('tag-filter');
-  if (!select) return;
-  const tags = Array.from(new Set(products.flatMap(p => p.tags)));
-  select.innerHTML = `<option value="">All Tags</option>`;
-  tags.forEach(tag => {
-    const option = document.createElement('option');
-    option.value = tag;
-    option.textContent = tag;
-    select.appendChild(option);
   });
 }
 
