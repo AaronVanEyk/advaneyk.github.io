@@ -1,20 +1,14 @@
-// products.js
-
 // ============================
-// Global products array
-// ============================
-let allProducts = []; // stores all products for filtering/search
-
-// ============================
-// Load CSV and initialize page
+// Load CSV and render products
 // ============================
 async function loadProducts(csvPath) {
   try {
     const response = await fetch(csvPath);
     if (!response.ok) throw new Error(`Failed to fetch ${csvPath}`);
     const text = await response.text();
-    allProducts = parseCSV(text);           // parse CSV into array of objects
-    renderProducts(allProducts);            // render initial product cards
+
+    const products = parseCSV(text); // parse CSV into array
+    renderProducts(products);        // display all products
   } catch (err) {
     console.error('Error loading products:', err);
     const container = document.getElementById('product-list');
@@ -23,22 +17,21 @@ async function loadProducts(csvPath) {
 }
 
 // ============================
-// Render category page product cards
+// Render product cards on category page
 // ============================
 function renderProducts(list) {
   const container = document.getElementById('product-list');
   if (!container) return;
 
-  container.innerHTML = ''; // clear existing
+  container.innerHTML = ''; // clear previous content
 
   list.forEach(p => {
-    // Defensive guard
-    if (!p || !p.product_number) return;
+    if (!p || !p.product_number) return; // guard against bad CSV
+
+    const imageSrc = `images/products/${p.product_number}.jpg`;
 
     const div = document.createElement('div');
     div.className = 'product-card';
-
-    const imageSrc = `images/products/${p.product_number}.jpg`;
 
     div.innerHTML = `
       <a href="product.html?sku=${encodeURIComponent(p.product_number)}" class="product-link">
@@ -65,4 +58,3 @@ function renderProducts(list) {
     container.appendChild(div);
   });
 }
-
